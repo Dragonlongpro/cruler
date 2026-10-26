@@ -101,12 +101,12 @@
     <div>
       <h1 id="page-title">CRuler 隐私政策</h1>
       <div class="meta">
-        <span id="meta-date">生效日期：2026-10-19</span>
+        <span id="meta-date">生效日期：2026-10-26</span>
         <span id="meta-scope">适用：CRuler（iOS）</span>
       </div>
     </div>
     <div class="lang-switch" role="group" aria-label="Language / 语言">
-      <button type="button" data-lang="zh" class="active" aria-pressed="true">中文</button>
+      <button type="button" data-lang="zh" class="active" aria-pressed="true">简体中文</button>
       <button type="button" data-lang="en" aria-pressed="false">English</button>
     </div>
   </div>
@@ -118,6 +118,9 @@
 <h2>一、总则</h2>
 <p>CRuler 是一款屏幕测量工具，用于把手机屏幕当作尺子测量小物件尺寸。</p>
 <p>我们<strong>不收集、不上传、不共享</strong>任何个人信息。App 无需注册或登录即可使用全部功能。</p>
+<p><strong>界面语言</strong>：跟随系统设置自动切换简体中文、香港繁体中文或英文，App 内不提供语言开关；
+你也可以在 iOS 设置中为 CRuler 单独指定语言。语言选择本身不涉及任何个人数据，也不会写入 App 的本地存储。</p>
+<p>本政策适用于 CRuler iOS 1.0 及后续版本。</p>
 
 <h2>二、我们不收集的信息</h2>
 <p>CRuler <strong>不</strong>收集以下任何信息：</p>
@@ -129,36 +132,52 @@
   <li>使用行为、崩溃日志、分析统计数据</li>
   <li>相册内容</li>
 </ul>
-<p>App 内<strong>不含</strong>任何第三方 SDK（无广告、无统计分析、无社交登录、无崩溃上报）。</p>
+<p>App 内<strong>不含</strong>任何第三方 SDK（无广告、无统计分析、无社交登录、无崩溃上报），
+也<strong>不进行跨 App 或跨网站追踪</strong>，不使用 ATT（App Tracking Transparency）。</p>
+<p><strong>隐私清单</strong>：App 内置 <code>PrivacyInfo.xcprivacy</code>，明确声明不追踪、不收集任何数据类型；
+仅因保存本地偏好设置而访问 <code>UserDefaults</code>（Apple 原因代码 CA92.1）。</p>
 
 <h2>三、仅保存在你设备本地的数据</h2>
-<p>以下设置仅保存在你设备的本地存储（iOS <code>UserDefaults</code>）中，<strong>不会离开你的设备</strong>：</p>
+<p>以下数据保存在 App 的本地存储（<code>UserDefaults</code> 与 App 容器内的 Application Support）中，
+<strong>不会上传到我们的服务器</strong>：</p>
 <table>
   <thead><tr><th>数据</th><th>用途</th></tr></thead>
   <tbody>
-    <tr><td>主题与配色选择</td><td>记住你选的外观</td></tr>
-    <tr><td>弥散主题强度、标尺颜色同步开关</td><td>记住显示偏好</td></tr>
-    <tr><td>机型校准结果（机型标识、每毫米像素数、偏移量）</td><td>保证测量精度</td></tr>
-    <tr><td>标记位置、锁定状态、工具栏显示状态</td><td>恢复上次使用状态</td></tr>
-    <tr><td>自定义背景图片</td><td>作为测量界面的背景</td></tr>
+    <tr><td>主题、配色与弥散光斑布局</td><td>记住你选的外观</td></tr>
+    <tr><td>弥散强度、标尺颜色同步、「跟随滑杆滚动刻度」</td><td>记住显示与操作偏好</td></tr>
+    <tr><td>触感反馈开关、拟物音效开关与音色</td><td>记住触感 / 音效偏好</td></tr>
+    <tr><td>机型校准结果（机型型号、每毫米像素数、长边尺寸）</td><td>保证测量精度</td></tr>
+    <tr><td>自定义背景图片与元数据（最多 6 个槽位、每日随机历史、派生配色）</td><td>作为测量界面的背景</td></tr>
+    <tr><td>首次启动标记</td><td>判断是否完成首次引导</td></tr>
   </tbody>
 </table>
-<p>删除 App 即会清除上述全部本地数据。</p>
+<p>机型校准会读取设备型号字符串（如 <code>iPhone17,2</code>）、屏幕尺寸与像素密度，
+仅在本机用于换算；<strong>不读取 IDFA / IDFV，也不会上传</strong>。</p>
+<p>标记位置、锁定状态与工具栏显隐仅在本次运行内有效，<strong>不写入本地存储</strong>。
+界面语言同样不落盘，只读取系统语言设置。</p>
+<p>删除 App 会清除 App 容器内的上述本地数据。iOS 可能按照你的备份设置，
+将 App 数据一并纳入 iCloud 或电脑备份；该备份由系统与你管理，开发者无法访问。</p>
 
 <h2>四、相册访问说明</h2>
 <p>App 的「自定义背景」功能使用 iOS 系统提供的 <strong>PhotosPicker</strong> 选择图片：</p>
 <ul>
   <li>由系统在独立进程中呈现选择界面，<strong>App 不会获得整个相册的访问权限</strong></li>
-  <li>只有你主动选中的那一张图片会被读取，并在<strong>设备本地</strong>裁剪、存储</li>
+  <li>只有你主动选中的那一张图片会被读取，并在<strong>设备本地</strong>裁剪、压缩后存入 App 容器
+      （最多 6 个自定义背景槽位）</li>
+  <li>「每天随机显示图片」只从你已保存在 App 本地的这些图片中选择，不读取相册其他内容</li>
   <li>图片<strong>不会上传到任何服务器</strong></li>
   <li>你不使用该功能时，App 不会访问相册</li>
 </ul>
 
 <h2>五、网络与权限</h2>
 <ul>
-  <li>CRuler <strong>不需要联网</strong>即可正常使用，App 内没有任何网络请求</li>
-  <li>不申请定位、麦克风、相机、通讯录、通知等权限</li>
-  <li>屏幕方向锁定为横屏，仅用于测量场景</li>
+  <li>CRuler <strong>不需要联网</strong>即可正常使用；App 自身不发起网络请求，也不含第三方网络 SDK</li>
+  <li>点击「设置 → 关于 → 隐私政策」会调用系统浏览器打开本页面；
+      浏览器可能访问网络，其行为受浏览器与 iOS 的隐私政策约束；App 不嵌入 WebView，也不读取浏览内容</li>
+  <li>本页面由 GitHub Pages 托管；访问本页面时，GitHub 可能按其隐私政策记录标准服务器日志
+      （如 IP 地址、浏览器信息）。该日志由 GitHub 管理，与 App 无关</li>
+  <li>不申请定位、麦克风、相机、通讯录、通知等权限；音效仅用于播放，不录音、不使用麦克风</li>
+  <li>不进行跨 App 或跨网站追踪，不使用 IDFA / IDFV 或 ATT</li>
 </ul>
 
 <h2>六、儿童隐私</h2>
@@ -166,7 +185,8 @@
 
 <h2>七、你的权利</h2>
 <p>由于我们不收集任何个人数据，也不存在需要导出、更正或删除的服务器端数据。</p>
-<p>如需清除全部本地数据，请在 iOS 设置中删除本 App，或使用 App 内的重置功能。</p>
+<p>如需清除全部本地数据，请在 iOS 设置中删除本 App，或使用 App 内的重置功能。
+如你开启了 iCloud / 电脑备份，历史备份中的 App 数据可能仍由系统保留，需在备份管理中处理。</p>
 
 <h2>八、政策变更</h2>
 <p>若本政策发生变更，我们会在本页面更新「生效日期」，并在重要变更时通过 App 更新说明告知。</p>
@@ -189,6 +209,11 @@
 <h2>1. Overview</h2>
 <p>CRuler is a screen measuring tool that turns your phone's screen into a ruler for measuring small objects.</p>
 <p>We <strong>do not collect, upload, or share</strong> any personal information. Every feature is available without registration or sign-in.</p>
+<p><strong>Language:</strong> the app follows your system language and switches automatically between
+Simplified Chinese, Hong Kong Traditional Chinese, and English. There is no in-app language switch;
+you may also set a language for CRuler in iOS Settings. Your language choice involves no personal data
+and is not written to the app's local storage.</p>
+<p>This policy applies to CRuler for iOS 1.0 and later versions.</p>
 
 <h2>2. Information We Do Not Collect</h2>
 <p>CRuler does <strong>not</strong> collect any of the following:</p>
@@ -200,36 +225,57 @@
   <li>Usage behavior, crash logs, or analytics data</li>
   <li>Photo library contents</li>
 </ul>
-<p>The app contains <strong>no</strong> third-party SDKs (no advertising, analytics, social login, or crash reporting).</p>
+<p>The app contains <strong>no</strong> third-party SDKs (no advertising, analytics, social login, or crash reporting),
+and it does <strong>not track you across apps or websites</strong>. It does not use ATT (App Tracking Transparency).</p>
+<p><strong>Privacy manifest:</strong> the app bundles <code>PrivacyInfo.xcprivacy</code>, which declares no tracking
+and no collected data types. The only accessed-API declaration is <code>UserDefaults</code> (Apple reason CA92.1),
+used solely to remember local preferences.</p>
 
 <h2>3. Data Stored Only on Your Device</h2>
-<p>The following settings are stored only in local storage on your device (iOS <code>UserDefaults</code>) and <strong>never leave it</strong>:</p>
+<p>The following data is stored in the app's local storage (<code>UserDefaults</code> and Application Support
+inside the app container) and <strong>is never uploaded to our servers</strong>:</p>
 <table>
   <thead><tr><th>Data</th><th>Purpose</th></tr></thead>
   <tbody>
-    <tr><td>Theme and color selections</td><td>Remember your appearance choice</td></tr>
-    <tr><td>Diffuse theme intensity and ruler color sync toggle</td><td>Remember display preferences</td></tr>
-    <tr><td>Device calibration results (model identifier, pixels per millimeter, offset)</td><td>Ensure measurement accuracy</td></tr>
-    <tr><td>Marker positions, lock state, toolbar visibility</td><td>Restore your previous session</td></tr>
-    <tr><td>Custom background image</td><td>Serve as the measuring interface background</td></tr>
+    <tr><td>Theme, colors, and diffuse-blob layout</td><td>Remember your appearance choice</td></tr>
+    <tr><td>Diffuse intensity, ruler color sync, and "Scroll with slider"</td><td>Remember display and interaction preferences</td></tr>
+    <tr><td>Haptics toggle, sound toggle, and sound choice</td><td>Remember haptic and sound preferences</td></tr>
+    <tr><td>Device calibration results (model, pixels per millimeter, long-edge size)</td><td>Ensure measurement accuracy</td></tr>
+    <tr><td>Custom background images and metadata (up to 6 slots, daily-random history, derived palette)</td><td>Serve as the measuring interface background</td></tr>
+    <tr><td>First-launch flag</td><td>Determine whether onboarding is complete</td></tr>
   </tbody>
 </table>
-<p>Deleting the app removes all of this local data.</p>
+<p>Device calibration reads the device model string (for example <code>iPhone17,2</code>), screen size, and pixel
+density, and uses them only on-device for conversion. It <strong>does not read IDFA / IDFV and never uploads them</strong>.</p>
+<p>Marker positions, lock state, and toolbar visibility are valid only for the current session and are
+<strong>not written to local storage</strong>. The interface language is not stored either; only the system
+language setting is read.</p>
+<p>Deleting the app removes this local data from the app container. iOS may include app data in your
+iCloud or computer backups according to your backup settings; those backups are managed by the system and by you,
+and the developer cannot access them.</p>
 
 <h2>4. About Photo Library Access</h2>
 <p>The "Custom Background" feature uses the system <strong>PhotosPicker</strong> provided by iOS to select images:</p>
 <ul>
   <li>The picker is presented by the system in a separate process; <strong>the app never receives access to your entire photo library</strong></li>
-  <li>Only the single image you explicitly select is read, then cropped and stored <strong>locally on your device</strong></li>
+  <li>Only the single image you explicitly select is read, then cropped and compressed <strong>locally on your device</strong>
+      and stored in the app container (up to 6 custom background slots)</li>
+  <li>"Randomize daily" only chooses among images already stored locally in the app; it does not read other photo library content</li>
   <li>Images are <strong>never uploaded to any server</strong></li>
   <li>If you do not use this feature, the app does not access your photo library</li>
 </ul>
 
 <h2>5. Network and Permissions</h2>
 <ul>
-  <li>CRuler <strong>works fully offline</strong>; the app makes no network requests</li>
-  <li>It does not request location, microphone, camera, contacts, or notification permissions</li>
-  <li>Screen orientation is locked to landscape, solely for measuring</li>
+  <li>CRuler <strong>works fully offline</strong>; the app itself makes no network requests and contains no third-party network SDKs</li>
+  <li>Tapping "Settings → About → Privacy Policy" opens this page in the system browser. The browser may access
+      the network under its own and iOS privacy terms; the app does not embed a WebView or read your browsing content</li>
+  <li>This page is hosted on GitHub Pages. When you visit it, GitHub may record standard server logs
+      (such as IP address and browser information) under its own privacy policy. Those logs are managed by GitHub,
+      not by the app</li>
+  <li>It does not request location, microphone, camera, contacts, or notification permissions. Sound is played back only;
+      the app does not record audio or use the microphone</li>
+  <li>It does not track you across apps or websites and does not use IDFA / IDFV or ATT</li>
 </ul>
 
 <h2>6. Children's Privacy</h2>
@@ -237,16 +283,20 @@
 
 <h2>7. Your Rights</h2>
 <p>Because we collect no personal data, there is no server-side data to export, correct, or delete.</p>
-<p>To erase all local data, delete the app in iOS Settings or use the reset function inside the app.</p>
+<p>To erase all local data, delete the app in iOS Settings or use the reset function inside the app.
+If you have iCloud or computer backups enabled, app data in historical backups may still be retained by the system;
+manage that through your backup settings.</p>
 
 <h2>8. Changes to This Policy</h2>
-<p>If this policy changes, we will update the "Effective date" on this page and notify you through the app's release notes for material changes.</p>
+<p>If this policy changes, we will update the "Effective date" on this page and notify you through the app's
+release notes for material changes.</p>
 
 <h2>9. Accessing This Policy in the App</h2>
 <p>You can open this policy at any time in the app via Settings → About → Privacy Policy.</p>
 
 <h2>10. Contact Us</h2>
-<p>If you have any questions about this policy or about privacy protection, please contact us using the developer contact information provided on the App Store product page.</p>
+<p>If you have any questions about this policy or about privacy protection, please contact us using the developer
+contact information provided on the App Store product page.</p>
 
 <div class="note">
   The Chinese version of this policy is authoritative. The English version is a reference translation; if there is any discrepancy, the Chinese version prevails.
@@ -275,13 +325,13 @@
   var TEXT = {
     zh: {
       title: 'CRuler 隐私政策',
-      date: '生效日期：2026-10-19',
+      date: '生效日期：2026-10-26',
       scope: '适用：CRuler（iOS）',
       doc: 'zh-CN'
     },
     en: {
       title: 'CRuler Privacy Policy',
-      date: 'Effective date: October 19, 2026',
+      date: 'Effective date: October 26, 2026',
       scope: 'Applies to: CRuler (iOS)',
       doc: 'en'
     }
