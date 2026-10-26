@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRuler 技术支持 · Support</title>
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --line: #e5e5ea;
+    --accent: #d4728c;
+    --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0b0f;
+      --fg: #f5f5f7;
+      --muted: #a1a1a6;
+      --line: #2c2c2e;
+      --card: #16161a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.75 -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC",
+          "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); }
+  .head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  h1 { font-size: 30px; line-height: 1.3; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 15px; margin: 0 0 10px; max-width: 560px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .meta span { margin-right: 14px; white-space: nowrap; }
+  .lang-switch {
+    display: inline-flex; flex: none; border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden; background: var(--card);
+  }
+  .lang-switch button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font: inherit; font-size: 14px; padding: 7px 14px; cursor: pointer;
+    min-height: 34px;
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; font-weight: 600; }
+  .lang-switch button:not(.active):hover { color: var(--fg); }
+  h2 {
+    font-size: 20px; margin: 40px 0 12px; padding-top: 8px;
+    letter-spacing: -0.01em;
+  }
+  h2::before {
+    content: ""; display: inline-block; width: 4px; height: 18px;
+    background: var(--accent); border-radius: 2px; margin-right: 10px;
+    vertical-align: -2px;
+  }
+  p, li { margin: 10px 0; }
+  ul { padding-left: 22px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .quick {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px; margin: 20px 0;
+  }
+  .quick a {
+    display: block; padding: 14px 16px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px; color: var(--fg);
+  }
+  .quick a:hover { text-decoration: none; border-color: var(--accent); }
+  .quick strong { display: block; color: var(--accent); font-size: 15px; margin-bottom: 3px; }
+  .quick span { color: var(--muted); font-size: 14px; line-height: 1.5; }
+  details {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; margin: 10px 0; padding: 0 16px;
+  }
+  summary {
+    cursor: pointer; padding: 14px 0; font-weight: 600;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; float: right; color: var(--accent); font-weight: 600;
+    font-size: 18px; line-height: 1;
+  }
+  details[open] summary::after { content: "−"; }
+  details[open] { padding-bottom: 14px; }
+  details p, details ul { font-size: 15px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #fff;
+    padding: 10px 16px; border-radius: 10px; font-weight: 600;
+    margin: 4px 8px 4px 0;
+  }
+  .btn:hover { text-decoration: none; filter: brightness(.95); }
+  .btn.secondary {
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--line);
+  }
+  .muted { color: var(--muted); font-size: 14px; }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
+    gap: 16px; margin: 18px 0; align-items: start;
+  }
+  .qr {
+    margin: 0; padding: 10px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px; text-align: center;
+  }
+  .qr img {
+    width: 100%; max-width: 200px; height: auto; display: block;
+    margin: 0 auto; background: #fff; padding: 6px; border-radius: 8px;
+  }
+  .qr figcaption {
+    margin-top: 8px; font-size: 14px; color: var(--muted); line-height: 1.5;
+  }
+  .qr figcaption strong {
+    display: block; color: var(--fg); font-size: 15px; margin-bottom: 2px;
+  }
+  footer {
+    margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+  footer a { margin-right: 14px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 480px) {
+    .head-row { flex-direction: column; }
+    h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="head-row">
+    <div>
+      <h1 id="page-title">CRuler 技术支持</h1>
+      <p class="sub" id="page-sub">测量、机型适配、背景与设置问题的排查与反馈</p>
+      <div class="meta">
+        <span id="meta-date">更新：2026-10-26</span>
+        <span id="meta-scope">适用于：CRuler iOS 1.0 及后续版本</span>
+      </div>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language / 语言">
+      <button type="button" data-lang="zh" class="active" aria-pressed="true">简体中文</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== 中文 ==================== -->
+<section id="zh" lang="zh-CN">
+
+<h2>快速排查</h2>
+<div class="quick">
+  <a href="#zh-calibration"><strong>测量不准</strong><span>机型与长边校准</span></a>
+  <a href="#zh-device"><strong>机型未识别</strong><span>手动输入屏幕长边</span></a>
+  <a href="#zh-markers"><strong>A-B 测距</strong><span>标记、锁定与归零</span></a>
+  <a href="#zh-background"><strong>背景与主题</strong><span>自定义背景、日夜模式</span></a>
+  <a href="#zh-language"><strong>语言与音效</strong><span>跟随系统语言、触感音效</span></a>
+  <a href="#zh-contact"><strong>联系支持</strong><span>反馈问题时请附信息</span></a>
+</div>
+
+<h2 id="zh-calibration">测量与校准</h2>
+
+<details open>
+  <summary>测量结果和实际尺寸不一致，怎么办？</summary>
+  <p>CRuler 把屏幕当作尺子，刻度按屏幕物理尺寸换算，不使用相机。请先确认机型校准正确：</p>
+  <ul>
+    <li>点工具栏「机型」，查看自动识别的机型是否与你的设备一致。</li>
+    <li>不一致或未识别：在弹窗中输入屏幕<strong>长边尺寸（mm，竖屏高度，不含边框/黑边）</strong>，点「确定」。</li>
+    <li>把物体平放在屏幕上，与刻度方向平行；保护膜/保护壳不会改变刻度，但会影响物体摆放。</li>
+    <li>折叠屏请确认当前使用外屏还是内屏；App 会按当前屏幕选择对应参数。</li>
+    <li>若仍有偏差，请附机型、长边尺寸、iOS 版本和对比照片反馈。</li>
+  </ul>
+</details>
+
+<details>
+  <summary>怎样手动校准机型？长边尺寸填什么？</summary>
+  <p>点工具栏「机型」→ 在「输入长边尺寸参数校正」输入屏幕物理长边（mm）→「确定」。
+     App 会用该值重新计算每毫米像素数。</p>
+  <p>长边指<strong>屏幕（不含边框）的竖屏高度</strong>，不是整机高度。可在厂商规格页或可信机型资料中
+     查屏幕尺寸；如不确定，请附机型与截图反馈。</p>
+</details>
+
+<details>
+  <summary>测量单位与 A-B 标记怎么用？</summary>
+  <p>工具栏「标记」开启 A/B 两点；拖动圆点，标签显示 cm / in / 寸（英文界面只显示 cm / in）。</p>
+  <p>「锁定」防止误触；「归零」把刻度起点复位；「设置 → 触感与音效 → 跟随滑杆滚动刻度」
+     可让刻度跟随左侧滑杆（默认关，需要先开启标记）。</p>
+</details>
+
+<h2 id="zh-device">机型与折叠屏</h2>
+
+<details>
+  <summary>机型没有自动识别，或识别错了？</summary>
+  <p>App 内置 131 款机型；新机型、非 iPhone 或特殊版本可能无法自动识别。
+     在「机型」弹窗手动输入屏幕长边即可正常测量，不影响其他功能。</p>
+  <p>如果识别结果明显不符，请通过下方联系方式提供设备型号（如 iPhone17,2）、机型名称和屏幕参数，
+     后续版本可补充机型库。</p>
+</details>
+
+<details>
+  <summary>折叠屏应该选外屏还是内屏？</summary>
+  <p>App 会按当前屏幕的像素宽高比尝试匹配外屏/内屏档案；若当前屏幕识别错误，
+     请手动输入当前屏幕的长边尺寸。外屏与内屏的参数不同，不能共用同一组校准值。</p>
+</details>
+
+<h2 id="zh-markers">标记与测距</h2>
+
+<details>
+  <summary>距离标签、锁定、归零分别在什么地方？</summary>
+  <p>开启「标记」后，A/B 两个圆点之间会出现距离标签；工具栏的「锁定」和「归零」分别用于
+     防止误触和恢复刻度起点。标记位置、锁定状态与工具栏显隐只在本次运行内有效，
+     不会写入本地存储。</p>
+</details>
+
+<h2 id="zh-background">主题、背景与语言</h2>
+
+<details>
+  <summary>怎样换主题、调弥散强度或同步标尺颜色？</summary>
+  <p>打开「设置 → 弥散主题」：可选择预置主题或自定义调色，调整弥散强度、标尺颜色同步，
+     以及在日间 / 夜间 / 跟随系统之间切换。</p>
+</details>
+
+<details>
+  <summary>怎样使用自定义背景图片？</summary>
+  <p>打开「设置 → 自定义背景」：共 6 个槽位。点空槽会打开系统相册选择图片；点已填充槽位启用；
+     长按槽位可编辑或删除。编辑器支持双指缩放、单指拖动、双击复位，点「保存」应用。</p>
+  <p>「每天随机显示图片」会从已保存的槽位中随机选择。图片背景与弥散主题互斥，
+     选择弥散主题会退出图片背景。图片只在本机处理，不会上传。</p>
+</details>
+
+<h2 id="zh-language">语言与音效</h2>
+
+<details>
+  <summary>怎样切换界面语言？</summary>
+  <p>界面语言跟随系统设置，在<strong>简体中文 / 香港繁体中文 / 英文</strong>之间自动切换；
+     App 内没有语言开关。也可以在 iOS 设置 → App → CRuler → 语言中单独指定。
+     切换语言后系统会重启 App。</p>
+</details>
+
+<details>
+  <summary>触感和音效可以关闭吗？</summary>
+  <p>打开「设置 → 触感与音效」，可分别关闭触感反馈和拟物音效，并在 3 种音色中选择。
+     音效仅用于播放，不录音、不使用麦克风。</p>
+</details>
+
+<h2 id="zh-data">数据、隐私与系统要求</h2>
+
+<details>
+  <summary>我的设置和背景图片会被上传吗？</summary>
+  <p>不会。设置和自定义背景只保存在本机；App 无需账号，自身不发起网络请求，也不含第三方 SDK。
+     删除 App 会清除本地数据；如开启了 iCloud 或电脑备份，历史备份中的 App 数据可能仍由系统保留。
+     详情见 <a href="index.html">隐私政策</a>。</p>
+</details>
+
+<details>
+  <summary>支持哪些设备和系统？</summary>
+  <p>需要 iOS 17 或更高版本；面向 iPhone（横屏为主；iPhone Duo 内屏支持竖屏）。
+     iPad 目前未适配。</p>
+</details>
+
+<h2 id="zh-contact">联系支持</h2>
+
+<div class="contact-grid">
+  <figure class="qr">
+    <img src="wechat-qr.jpg" alt="微信二维码：dragonc_btfx" loading="lazy">
+    <figcaption><strong>微信</strong><span>dragonc_btfx</span></figcaption>
+  </figure>
+  <figure class="qr">
+    <img src="xhs-qr.jpg" alt="小红书二维码：就这么Cat" loading="lazy">
+    <figcaption><strong>小红书</strong><span>就这么Cat</span></figcaption>
+  </figure>
+</div>
+
+<p>邮箱：<a href="mailto:yjworks@foxmail.com">yjworks@foxmail.com</a></p>
+<p class="muted">工作时间：每周一～周五；周末及法定节假日休息。</p>
+<p class="muted">微信可扫码或搜索 <strong>dragonc_btfx</strong>；小红书可扫码或搜索 <strong>就这么Cat</strong>。
+   添加微信时请备注「CRuler 支持」。</p>
+
+<p>反馈时请附上：</p>
+<ul>
+  <li>App 版本与 build（App Store / TestFlight 可见）</li>
+  <li>设备型号（如 iPhone 17 Pro）、iOS 版本</li>
+  <li>复现步骤、预期结果与实际结果</li>
+  <li>截图或录屏（请勿包含个人信息）</li>
+</ul>
+<p class="muted">提交前请先阅读上面的常见问题，通常能更快解决。</p>
+
+<p class="muted">隐私政策：<a href="index.html">CRuler 隐私政策</a></p>
+
+</section>
+
+<!-- ==================== English ==================== -->
+<section id="en" lang="en" hidden>
+
+<h2>Quick checks</h2>
+<div class="quick">
+  <a href="#en-calibration"><strong>Inaccurate result</strong><span>Device and long-edge calibration</span></a>
+  <a href="#en-device"><strong>Device not recognized</strong><span>Enter the screen long edge</span></a>
+  <a href="#en-markers"><strong>A-B measuring</strong><span>Markers, lock, and reset</span></a>
+  <a href="#en-background"><strong>Background &amp; theme</strong><span>Custom photos, day/night</span></a>
+  <a href="#en-language"><strong>Language &amp; sound</strong><span>Follows system, haptics</span></a>
+  <a href="#en-contact"><strong>Contact support</strong><span>What to include</span></a>
+</div>
+
+<h2 id="en-calibration">Measuring &amp; calibration</h2>
+
+<details open>
+  <summary>My measurement does not match the real size. What should I do?</summary>
+  <p>CRuler uses the screen as a ruler. The scale is derived from the screen's physical size, not the camera.
+     First check that the device calibration is correct:</p>
+  <ul>
+    <li>Tap <strong>Device</strong> in the toolbar and confirm that the detected model matches your device.</li>
+    <li>If it is wrong or not detected, enter the screen's <strong>long edge in mm</strong>
+        (portrait screen height, excluding bezels) and tap <strong>OK</strong>.</li>
+    <li>Place the object flat on the screen, parallel to the scale. Screen protectors and cases do not change
+        the scale, but they can affect placement.</li>
+    <li>On a foldable, confirm whether you are using the outer or inner screen; the app selects parameters
+        for the active screen.</li>
+    <li>If the error remains, include the device model, long-edge value, iOS version, and a comparison photo
+        in your support request.</li>
+  </ul>
+</details>
+
+<details>
+  <summary>How do I calibrate manually? What is the long edge?</summary>
+  <p>Tap <strong>Device</strong> in the toolbar, enter the screen's physical long edge in mm under
+     "Calibrate", and tap <strong>OK</strong>. The app recalculates pixels per millimeter.</p>
+  <p>The long edge is the <strong>portrait height of the screen</strong> (excluding bezels), not the height of the
+     whole phone. Check the manufacturer's specifications or a reliable device database. If you are unsure,
+     send us the model and a screenshot.</p>
+</details>
+
+<details>
+  <summary>How do units and A-B markers work?</summary>
+  <p>Turn on <strong>Markers</strong> in the toolbar to show points A and B. Drag the dots; the label shows
+     cm / in / 寸 (English UI shows cm / in only).</p>
+  <p><strong>Lock</strong> prevents accidental touches; <strong>Reset</strong> returns the scale to its origin.
+     "Scroll with slider" under Settings → Haptics &amp; Sound makes the scale follow the left marker
+     (off by default; markers must be on).</p>
+</details>
+
+<h2 id="en-device">Devices &amp; foldables</h2>
+
+<details>
+  <summary>My device is not detected, or the wrong model is detected.</summary>
+  <p>The app includes 131 models. New models, non-iPhones, and some regional variants may not be detected.
+     Enter the screen long edge manually under Device; all other features keep working.</p>
+  <p>If the result is clearly wrong, send us the device identifier (for example iPhone17,2), model name,
+     and screen specifications via the contact details below so we can add it to a future catalog.</p>
+</details>
+
+<details>
+  <summary>Which screen should I use on a foldable?</summary>
+  <p>The app tries to match the outer or inner display profile from the current screen's pixel aspect ratio.
+     If the active screen is misidentified, enter that screen's long edge manually. Outer and inner screens
+     have different parameters and cannot share one calibration.</p>
+</details>
+
+<h2 id="en-markers">Markers &amp; measuring</h2>
+
+<details>
+  <summary>Where are the distance label, lock, and reset?</summary>
+  <p>After turning on Markers, a distance label appears between points A and B. <strong>Lock</strong> prevents
+     accidental touches and <strong>Reset</strong> returns the scale to its origin. Marker positions, lock state,
+     and toolbar visibility last for the current session only and are not stored locally.</p>
+</details>
+
+<h2 id="en-background">Theme, background &amp; language</h2>
+
+<details>
+  <summary>How do I change the theme, intensity, or ruler color sync?</summary>
+  <p>Open Settings → Theme. Choose a preset or custom palette, adjust the diffuse intensity, enable ruler color
+     sync, and switch between day, night, and system appearance.</p>
+</details>
+
+<details>
+  <summary>How do I use custom background photos?</summary>
+  <p>Open Settings → Background. There are 6 slots. Tap an empty slot to open the system photo picker; tap a filled
+     slot to enable it; long-press a slot to edit or delete it. The editor supports pinch-to-zoom, drag-to-move,
+     and double-tap-to-reset; tap Save to apply.</p>
+  <p>"Randomize daily" picks from the saved slots. Photo backgrounds and the diffuse theme are mutually exclusive;
+     selecting a diffuse theme exits photo mode. Images are processed only on your device and are never uploaded.</p>
+</details>
+
+<h2 id="en-language">Language &amp; sound</h2>
+
+<details>
+  <summary>How do I change the interface language?</summary>
+  <p>The interface follows your system language and switches automatically between
+     <strong>Simplified Chinese, Hong Kong Traditional Chinese, and English</strong>. There is no in-app language
+     switch. You may also set a language for CRuler in iOS Settings → Apps → CRuler → Language. Changing the
+     language restarts the app.</p>
+</details>
+
+<details>
+  <summary>Can I turn off haptics and sound?</summary>
+  <p>Open Settings → Haptics &amp; Sound. You can disable haptics and sound independently and choose from
+     3 sound styles. Sound is played back only; the app does not record audio or use the microphone.</p>
+</details>
+
+<h2 id="en-data">Data, privacy &amp; requirements</h2>
+
+<details>
+  <summary>Are my settings and background photos uploaded?</summary>
+  <p>No. Settings and custom backgrounds stay on your device. The app requires no account, makes no network
+     requests itself, and contains no third-party SDKs. Deleting the app removes local data; if iCloud or computer
+     backups are enabled, app data in historical backups may still be retained by the system. See the
+     <a href="index.html">Privacy Policy</a> for details.</p>
+</details>
+
+<details>
+  <summary>Which devices and systems are supported?</summary>
+  <p>iOS 17 or later, designed for iPhone (primarily landscape; iPhone Duo inner screen supports portrait).
+     iPad is not currently supported.</p>
+</details>
+
+<h2 id="en-contact">Contact support</h2>
+
+<div class="contact-grid">
+  <figure class="qr">
+    <img src="wechat-qr.jpg" alt="WeChat QR code: dragonc_btfx" loading="lazy">
+    <figcaption><strong>WeChat</strong><span>dragonc_btfx</span></figcaption>
+  </figure>
+  <figure class="qr">
+    <img src="xhs-qr.jpg" alt="Xiaohongshu QR code: 就这么Cat" loading="lazy">
+    <figcaption><strong>Xiaohongshu</strong><span>就这么Cat</span></figcaption>
+  </figure>
+</div>
+
+<p>Email: <a href="mailto:yjworks@foxmail.com">yjworks@foxmail.com</a></p>
+<p class="muted">Hours: Monday–Friday; closed on weekends and public holidays.</p>
+<p class="muted">Scan the WeChat or Xiaohongshu code, or search for the IDs above.
+   When adding WeChat, please mention "CRuler support".</p>
+
+<p>Please include:</p>
+<ul>
+  <li>App version and build (shown in the App Store / TestFlight)</li>
+  <li>Device model (for example iPhone 17 Pro) and iOS version</li>
+  <li>Steps to reproduce, expected result, and actual result</li>
+  <li>Screenshots or a screen recording (do not include personal information)</li>
+</ul>
+<p class="muted">Reading the FAQ above first usually resolves the issue faster.</p>
+
+<p class="muted">Privacy: <a href="index.html">CRuler Privacy Policy</a></p>
+
+</section>
+
+<footer>
+  <span id="foot-zh">© 2026 CRuler · <a href="index.html">隐私政策</a></span>
+  <span id="foot-en" hidden>© 2026 CRuler · <a href="index.html">Privacy Policy</a></span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var zh = document.getElementById('zh');
+  var en = document.getElementById('en');
+  var title = document.getElementById('page-title');
+  var sub = document.getElementById('page-sub');
+  var date = document.getElementById('meta-date');
+  var scope = document.getElementById('meta-scope');
+  var footZh = document.getElementById('foot-zh');
+  var footEn = document.getElementById('foot-en');
+  var buttons = document.querySelectorAll('.lang-switch button');
+
+  var TEXT = {
+    zh: {
+      title: 'CRuler 技术支持',
+      sub: '测量、机型适配、背景与设置问题的排查与反馈',
+      date: '更新：2026-10-26',
+      scope: '适用于：CRuler iOS 1.0 及后续版本',
+      doc: 'zh-CN'
+    },
+    en: {
+      title: 'CRuler Support',
+      sub: 'Troubleshooting and feedback for measuring, device calibration, backgrounds, and settings.',
+      date: 'Updated: October 26, 2026',
+      scope: 'Applies to: CRuler for iOS 1.0 and later',
+      doc: 'en'
+    }
+  };
+
+  function setLang(lang) {
+    var t = TEXT[lang] || TEXT.zh;
+    zh.hidden = lang !== 'zh';
+    en.hidden = lang !== 'en';
+    footZh.hidden = lang !== 'zh';
+    footEn.hidden = lang !== 'en';
+    title.textContent = t.title;
+    sub.textContent = t.sub;
+    date.textContent = t.date;
+    scope.textContent = t.scope;
+    document.documentElement.lang = t.doc;
+    document.title = t.title;
+    buttons.forEach(function (b) {
+      var on = b.getAttribute('data-lang') === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      setLang(b.getAttribute('data-lang'));
+    });
+  });
+
+  // 支持 ?lang=en 直接打开英文版
+  var m = /[?&]lang=(en)/.exec(location.search);
+  if (m) setLang(m[1]);
+})();
+</script>
+</body>
+</html>
